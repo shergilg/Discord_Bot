@@ -25,34 +25,16 @@ bot.on('message', message =>
     const args =message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
-    if(message.content.startsWith(`${prefix}ping`))
+    if (!bot.commands.has(command)) return;
+
+    try
     {
-        bot.commands.get('ping').execute(message, args);
+        bot.commands.get(command).execute(message, args);
     }
-    else if (message.content.startsWith(`${prefix}server`))
+    catch (error)
     {
-        bot.commands.get('server').execute(message, args);
-    }
-    else if (command.startsWith('say')) {
-        bot.commands.get('say').execute(message, args);
-    }
-    else if (command === 'kick')
-    {   
-        bot.commands.get('kick').execute(message, args);
-    }
-    else if (command === 'avatar')
-    {
-        bot.commands.get('avatar').execute(message, args);
-    }
-    else if (command === 'prune')
-    {
-        bot.commands.get('prune').execute(message, args);
-    }
-    else if (command === 'user-info') {
-        bot.commands.get('user-info').execute(message, args);
-    }
-    else if (command === 'commands') {
-        bot.commands.get('commands').execute(message, args);
+        console.error(error);
+        message.reply('There was an error trying to execute that command!');
     }
 })
 
