@@ -1,16 +1,14 @@
 module.exports =
 {
-    name: 'say',
-    description: 'say something',
-    execute(message, args) {
-        if (!args.length) {
-            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-        }
-        else if (args[0] === 'foo') {
-            return message.channel.send('bar');
-        }
-
-        message.channel.send(`${args[0]}`);
-
-    },
+	name: 'say',
+	description: 'say something',
+	args: true,
+	execute(message, args) {
+		if (args[0] === 'foo') {
+			return message.channel.send('bar');
+		}
+		let saying = '';
+		for (let i = 0; i < args.length; i++) { saying += args[i] + ' '; }
+		message.channel.send(`${saying}`);
+	},
 };

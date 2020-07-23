@@ -1,9 +1,11 @@
+/* eslint-disable brace-style */
 module.exports = 
 {
-    name: 'ping',
-    description: 'Ping!',
-    execute(message, args)
-    {
-        message.channel.send('Pong');
-    },
+	name: 'ping',
+	cooldown: 5,
+	description: 'Ping!',
+	execute(message, args)
+	{
+		message.channel.send('Pong');
+	},
 };
